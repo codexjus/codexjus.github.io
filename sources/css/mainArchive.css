@@ -1,83 +1,132 @@
 @import 'reset.css';
 
-
+/* Cursiva resaltada para términos importantes */
 i {
-    font-weight: bold;
-    color: #FFA07A;
+  font-weight: bold;
+  color: #FFA07A; /* Salmón claro para destacar */
+  font-style: italic;
 }
 
-section p{
-    text-align: left;
+/* Texto en secciones alineado a la izquierda para legibilidad */
+section p {
+  text-align: left;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 1em;
 }
-section li{
-    text-align: left;
-    font-size: 1rem;
+
+section li {
+  text-align: left;
+  font-size: 1rem;
+  margin-bottom: 0.5em;
 }
 
-   
-        body,
-        main,
-        article,
-        section {
-            /* Asegurar que no corten overflow, especialmente no ocultar overflow horizontal */
-            overflow-x: visible;
-            width: 100%;
-        }
+/* Evitar corte de overflow especialmente horizontal */
+body,
+main,
+article,
+section {
+  overflow-x: visible;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-texto-principal);
+}
 
-        .citation {
-            border-left: 4px solid #007BFF;
-           
-            color: #333;
-            padding-left: 12px;
-            margin: 12px 0;
-            font-style: italic;
-        }
+/* Cita con borde destacado y estilo itálico */
+.citation {
+  border-left: 4px solid var(--color-enlace-hover);
+  color: var(--color-texto-principal);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  font-weight: 600;
+  background-color: var(--color-fondo-secundario);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px var(--color-shadow);
+  transition: background-color 0.3s ease;
+}
 
-        .deleted {
-            color: red;
-            
-            font-weight: bold;
-        }
+.citation:hover {
+  background-color: var(--color-fondo-hover);
+}
 
-        .added {
-            color: #007BFF;
-            
-            font-weight: bold;
-        }
+/* Texto marcado como borrado (deleted) */
+.deleted {
+  color: #a00;
+  font-weight: bold;
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+}
 
-        .deleted-paragraph {
-            border-left: 4px solid red;
-            font-size: 1rem;
-            color: #a00;
-            padding-left: 12px;
-            margin: 12px 0;
-            font-style: italic;
-            font-weight: bold;
-        }
+/* Texto marcado como agregado (added) */
+.added {
+  color: var(--color-enlace-hover);
+  font-weight: bold;
+  background-color: rgba(0, 123, 255, 0.1);
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+}
 
-        .table-container {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            /* para desplazamiento suave en iOS */
-            border: 1px solid #ccc;
-            /* opcional: para delimitar el área */
-        }
+/* Párrafo marcado como borrado */
+.deleted-paragraph {
+  border-left: 4px solid #a00;
+  font-size: 1rem;
+  color: #a00;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  font-weight: bold;
+  background-color: var(--color-fondo-secundario);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px var(--color-shadow);
+  transition: background-color 0.3s ease;
+}
 
-        .table-container table {
-            width: 100%;
-            min-width: 600px;
-            /* fuerza scroll si pantalla pequeña */
-            border-collapse: collapse;
-        }
+.deleted-paragraph:hover {
+  background-color: var(--color-fondo-hover);
+}
 
-        th,
-        td {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-            vertical-align: top;
-            font-size: 1rem;
-        }
+/* Contenedor para tablas con scroll horizontal en móvil */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* desplazamiento suave iOS */
+  border: 1px solid var(--color-borde);
+  border-radius: var(--border-radius);
+  background-color: var(--color-fondo-secundario);
+  box-shadow: 0 2px 6px var(--color-shadow);
+  margin: 1rem 0;
+}
 
-       
+/* Tablas con formato legible */
+.table-container table {
+  width: 100%;
+  min-width: 600px; /* fuerza scroll si pantalla pequeña */
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.75em 1em;
+  border: 1px solid var(--color-borde);
+  text-align: left;
+  vertical-align: top;
+  font-size: 1rem;
+  color: var(--color-texto-principal);
+  background-color: var(--color-fondo-principal);
+}
+
+/* Resaltado al pasar sobre celdas */
+th:hover,
+td:hover {
+  background-color: var(--color-fondo-hover);
+  transition: background-color 0.3s ease;
+}
+
+/* Para mejorar experiencia en móviles */
+@media (max-width: 768px) {
+  .table-container table {
+    min-width: 100%;
+  }
+}
