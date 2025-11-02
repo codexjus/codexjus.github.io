@@ -1,0 +1,83 @@
+@import 'reset.css';
+
+
+i {
+    font-weight: bold;
+    color: #FFA07A;
+}
+
+section p{
+    text-align: left;
+}
+section li{
+    text-align: left;
+    font-size: 1rem;
+}
+
+   
+        body,
+        main,
+        article,
+        section {
+            /* Asegurar que no corten overflow, especialmente no ocultar overflow horizontal */
+            overflow-x: visible;
+            width: 100%;
+        }
+
+        .citation {
+            border-left: 4px solid #007BFF;
+           
+            color: #333;
+            padding-left: 12px;
+            margin: 12px 0;
+            font-style: italic;
+        }
+
+        .deleted {
+            color: red;
+            
+            font-weight: bold;
+        }
+
+        .added {
+            color: #007BFF;
+            
+            font-weight: bold;
+        }
+
+        .deleted-paragraph {
+            border-left: 4px solid red;
+            font-size: 1rem;
+            color: #a00;
+            padding-left: 12px;
+            margin: 12px 0;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            /* para desplazamiento suave en iOS */
+            border: 1px solid #ccc;
+            /* opcional: para delimitar el área */
+        }
+
+        .table-container table {
+            width: 100%;
+            min-width: 600px;
+            /* fuerza scroll si pantalla pequeña */
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+            font-size: 1rem;
+        }
+
+       

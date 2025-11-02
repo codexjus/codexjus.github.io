@@ -1,0 +1,479 @@
+/* Importación de Google Material Icons */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Fira+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Variables de color para temas claro y oscuro */
+/* Tema oscuro por defecto */
+:root {
+  --color-fondo-principal: #121212;           /* Fondo muy oscuro */
+  --color-fondo-secundario: #1f1f1f;         /* Fondo secundario oscuro pero diferenciado */
+  --color-header-footer-bg: #121212;          /* Mismo que fondo para integración */
+  --color-texto-principal: #eaeaea;            /* Texto casi blanco */
+  --color-footer-texto: #aaaaaa;                /* Texto pie con buen contraste */
+  --color-titulo: #ffffff;                      /* Título bien legible blanco puro */
+  --color-enlace: #999999;                      /* Enlaces visibles pero suaves con mejor contraste */
+  --color-enlace-hover: #ffffff;                /* Enlace hover blanco */
+  --color-borde: #555555;                        /* Bordes un poco más claros */
+  --color-fondo-hover: #292929;                  /* Fondo hover distinto y marcado */
+  --color-nav-fondo: #121212;
+  /* Sombra para tema oscuro */
+  --color-shadow: rgba(0, 0, 0, 0.4);
+  --color-shadow-hover: rgba(0, 0, 0, 0.6);
+}
+
+.light-theme {
+  --color-fondo-principal: #ffffff;            /* Fondo blanco puro */
+  --color-fondo-secundario: #f2f2f2;           /* Gris muy claro */
+  --color-header-footer-bg: #fafafa;            /* Fondo de header/foot algo más gris */
+  --color-texto-principal: #111111;              /* Texto muy oscuro casi negro */
+  --color-footer-texto: #444444;                  /* Texto pie más oscuro para contraste */
+  --color-titulo: #000000;                          /* Título negro puro */
+  --color-enlace: #333333;                          /* Enlace oscuro más visible */
+  --color-enlace-hover: #000000;                    /* Hover negro puro */
+  --color-borde: #d9d9d9;                            /* Borde ligeramente más oscuro */
+  --color-fondo-hover: #e6e6e6;                       /* Fondo hover gris claro */
+  --color-nav-fondo: #fafafa;
+  /* Sombra para tema claro */
+  --color-shadow: rgba(0, 0, 0, 0.15);
+  --color-shadow-hover: rgba(0, 0, 0, 0.3);
+}
+
+/* Reset y estilos base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--color-fondo-principal);
+  color: var(--color-texto-principal);
+  font-family: 'Roboto', sans-serif;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  transition: color 0.2s, background 0.2s, border 0.2s;
+}
+
+/* Enlaces y botones */
+a,
+button {
+  padding: 0.5em 1.5rem;
+  background: none;
+  border: 1px solid var(--color-borde);
+  border-radius: 0.5em;
+  color: var(--color-enlace);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-block;
+  margin: 0.5em;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 6px var(--color-shadow);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  user-select: none; /* evita selección accidental */
+}
+
+a:hover,
+a:focus,
+button:hover,
+button:focus {
+  background: var(--color-fondo-hover);
+  color: var(--color-enlace-hover);
+  border-color: var(--color-enlace-hover);
+  outline: none;
+  box-shadow: 0 4px 12px var(--color-shadow-hover);
+  transform: translateY(-2px); /* ligera elevación */
+}
+
+a:active,
+button:active {
+  background: var(--color-borde);
+  box-shadow: none;
+  transform: translateY(0);
+  outline: none;
+}
+
+a::after {
+  content: none;
+}
+
+/* Navegación con subrayado animado */
+nav {
+  padding: 1rem;
+  border-bottom: solid 1px var(--color-borde);
+}
+
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-enlace);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after,
+nav a:focus::after {
+  width: 100%;
+}
+
+/* Header */
+header {
+  background: var(--color-header-footer-bg);
+  padding: 1.2em 0;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--color-titulo);
+  border-bottom: 1px solid var(--color-borde);
+  transition: background-color 0.3s;
+}
+
+header:hover {
+  background-color: var(--color-fondo-hover);
+}
+
+/* Main */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  margin: auto;
+}
+
+main p {
+  text-indent: 1.5rem;
+  line-height: 1.8rem;
+  padding: 0.5rem 2rem;
+  background: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* Secciones */
+section {
+  background: var(--color-fondo-principal);
+  padding: 1.5em 1em;
+  border: 1px solid var(--color-borde);
+  border-radius: 1em;
+  margin-bottom: 2em;
+  transition: background-color 0.3s;
+}
+
+/* Contenedores varios */
+.divContainer,
+#indice,
+.divContainer_links {
+  display: block;
+  background: var(--color-fondo-secundario);
+  border: 1px solid var(--color-borde);
+  padding: 1em;
+  border-radius: 1em;
+  margin: 1rem;
+}
+
+.divContainer_links h3 {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 1em;
+  background: none;
+  color: var(--color-titulo);
+  padding: 0;
+}
+
+/* Tarjetas de documentación */
+.card_docs {
+  width: 100%;
+  background: var(--color-fondo-secundario);
+  border: 1px solid var(--color-borde);
+  padding: 1.5em 1.5em 2em;
+  border-radius: 1em;
+  margin: 1em 0;
+  box-shadow: 0 4px 12px var(--color-shadow);
+  display: block;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  text-align: left;
+}
+
+.card_docs:hover {
+  background-color: var(--color-fondo-hover);
+  border-color: var(--color-enlace-hover);
+  box-shadow: 0 8px 20px var(--color-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.card_docs h4 {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  color: var(--color-titulo);
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.card_docs p {
+  line-height: 1.6;
+  padding: 1rem;
+  margin-bottom: 1.2em;
+  color: var(--color-texto-principal);
+  font-size: 1em;
+}
+
+/* Estilo específico para el link en la card */
+.card_docs a {
+  display: block;
+  max-width: 40vw;
+  margin: 0 auto;
+  padding: 0.6em 1.2em;
+  background-color: var(--color-enlace);
+  color: var(--color-fondo-secundario);
+  text-decoration: none;
+  border-radius: 0.6em;
+  font-weight: 600;
+  font-size: 1em;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--color-shadow);
+}
+
+.card_docs a:hover,
+.card_docs a:focus {
+  background-color: var(--color-enlace-hover);
+  color: var(--color-fondo-principal);
+  outline: none;
+  box-shadow: 0 4px 12px var(--color-shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Sección categorías */
+.category-section {
+  margin-bottom: 2rem;
+  padding: 0;
+  border: none;
+}
+
+.category-section > h3 {
+  border-bottom: 1px solid var(--color-borde);
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--color-titulo);
+  background: none;
+}
+
+/* Detalles y resumen */
+details {
+  background: var(--color-fondo-secundario);
+  border: 1px solid var(--color-borde);
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em 0 1.5em;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+details:hover {
+  background-color: var(--color-fondo-hover);
+  border-color: var(--color-enlace-hover);
+}
+
+summary {
+  list-style: none;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  color: var(--color-titulo);
+  user-select: none;
+  padding: 0.6em 0;
+  font-size: 1em;
+  background: none;
+  transition: color 0.3s;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  width: 90vw;
+}
+
+summary:hover,
+summary:focus {
+  color: var(--color-enlace-hover);
+  outline: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 0.5em;
+  transition: transform 0.3s;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details > *:not(summary) {
+  margin-top: 1em;
+  color: var(--color-texto-principal);
+  line-height: 1.5;
+}
+
+/* Inputs */
+input {
+  padding: 0.5em 1em;
+  border-radius: 1.5em;
+  font-weight: 500;
+  background: var(--color-fondo-secundario);
+  border: 1px solid var(--color-borde);
+  font-size: 1em;
+  margin: 0.5em 0;
+  transition: border 0.2s, box-shadow 0.3s;
+  cursor: text;
+  color: var(--color-texto-principal);
+}
+
+input:hover {
+  border-color: var(--color-enlace-hover);
+  box-shadow: 0 0 5px var(--color-borde);
+}
+
+input:focus {
+  border-color: var(--color-enlace);
+  outline: none;
+  box-shadow: 0 0 8px var(--color-enlace);
+}
+
+#legislacion input {
+  display: block;
+  background: var(--color-fondo-secundario);
+  width: 50vw;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+/* Clases utilitarias */
+.hidden {
+  display: none !important;
+}
+
+/* Encabezados */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2 {
+  color: var(--color-titulo);
+  background: none;
+  text-align: center;
+  margin: 2rem 0 1rem;
+  font-weight: 800;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-titulo);
+  background: none;
+  margin: 1rem 0 0.5rem;
+  text-align: center;
+  padding: 0.5em 0;
+  font-weight: 700;
+}
+
+/* Contenedor para botones de tema y scroll */
+#theme-toggle-container {
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 0.1em;
+  z-index: 1000;
+  background: var(--color-header-footer-bg);
+  padding: 0.5em;
+  border-radius: 1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-borde);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+#theme-toggle-container button {
+  background: var(--color-fondo-secundario);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.7em;
+  box-shadow: 0 1px 4px var(--color-shadow);
+  color: var(--color-texto-principal);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+#theme-toggle-container button:hover {
+  background: var(--color-fondo-hover);
+  color: var(--color-enlace-hover);
+  box-shadow: 0 2px 8px var(--color-shadow-hover);
+}
+
+/* Footer */
+footer {
+  background: var(--color-header-footer-bg);
+  padding: 2em 1em;
+  font-size: 1em;
+  text-align: center;
+  color: var(--color-footer-texto);
+  border-top: 1px solid var(--color-borde);
+  transition: background-color 0.3s;
+}
+
+footer:hover {
+  background-color: var(--color-fondo-hover);
+}
+
+footer p,
+footer strong {
+  color: var(--color-footer-texto);
+}
+
+/* Texto animado */
+#animated-text {
+  transition: opacity 0.5s;
+  font-family: 'JetBrains Mono', 'Fira Mono', monospace;
+  color: var(--color-titulo);
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+}
+
+/* Resaltado */
+mark {
+  color: inherit;
+  background: var(--color-fondo-hover);
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+  font-weight: 700;
+}

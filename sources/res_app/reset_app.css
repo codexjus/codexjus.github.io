@@ -1,0 +1,136 @@
+@import "../css/mainArchive.css";
+
+
+.container {
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    margin-bottom: 5rem;
+    width: 100%;
+}
+
+dd p {
+    text-indent: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-bottom: 24px;
+    text-align: center;
+
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+
+}
+
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: #ccc;
+    color: #000;
+}
+
+.checkbox-group {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    /* Tamaño del texto también afecta el diseño */
+    user-select: none;
+    /* Para no seleccionar texto al hacer click */
+}
+
+/* Ocultamos el checkbox original */
+.checkbox-group input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Creamos el cuadro personalizado */
+.checkbox-group .custom-checkbox {
+    width: 30px;
+    /* Tamaño ancho */
+    height: 30px;
+    /* Tamaño alto */
+    background-color: #eee;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    /* Bordes redondeados */
+    margin-right: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+    display: inline-block;
+    position: relative;
+}
+
+/* Cuando el checkbox está marcado */
+.checkbox-group input[type="checkbox"]:checked+.custom-checkbox {
+    background-color: rgba(255, 166, 0, 0.897);
+    border-color: #ccc;
+}
+
+/* Añadimos la marca de check con pseudo-elemento */
+.checkbox-group .custom-checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 4px;
+    width: 8px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+/* Mostrar la marca si está chequeado */
+.checkbox-group input[type="checkbox"]:checked+.custom-checkbox:after {
+    display: block;
+}
+
+
+form button {
+    margin-top: 2em;
+    width: 100%;
+
+    font-size: 16px;
+    padding: 12px;
+
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+#result {
+    margin-top: 20px;
+
+}
+
+details {
+    width: 100%;
+
+}
+
+summary {
+    width: 100%;
+}

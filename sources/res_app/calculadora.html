@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../icons/icons8-temis-96 (1).png" type="image/x-icon">
+    <link rel="stylesheet" href="./reset_app.css">
+    <title>Calculadora Indemnizatoria</title>
+
+</head>
+
+<body>
+    <header>
+        <h1>Calculadora de Rubros Indemnizatorios</h1>
+        <a href="../../index.html">Volver a la pagina principal</a>
+    </header>
+    <main>
+        <div class="container">
+            <details>
+                <summary>Cálculos empleados</summary>
+                <section>
+                    <dl>
+                        <dt>Haberes por Días Trabajados</dt>
+                        <dd>
+                            <div>
+                                <p><strong>(Remuneración / Días del Mes) x Días Trabajados</strong></p>
+                                <p>
+                                    <em>Aclaración:</em> Los días del mes corresponden al de despido pudiendo ser 28,
+                                    29, 30
+                                    o
+                                    31 dependiendo del mes específico.
+                                </p>
+                            </div>
+                        </dd>
+
+                        <dt>Integración del Mes de Despido</dt>
+                        <dd>
+                            <div>
+                                <p> <strong>(Remuneración / Días del mes) x (Días del Mes - Días Trabajados)</strong>
+                                </p>
+                                <p>
+                                    <em>Aclaración:</em> Los días del mes pueden ser 28, 29, 30 o 31, según el mes
+                                    específico.
+                                </p>
+                            </div>
+
+                        </dd>
+
+                        <dt>SAC Integración del Mes de Despido</dt>
+                        <dd>
+                            <div>
+                                <p> <strong>Integración del Mes de Despido / 12</strong></p>
+
+                            </div>
+                        </dd>
+
+                        <dt>Vacaciones no Gozadas</dt>
+                        <dd>
+                            <div>
+                                <p><strong>(Remuneración / 25 ) x [ (Días trabajados x Días de Vacaciones) / 365
+                                        ]</strong>
+                                </p>
+                            </div>
+
+                            <p>
+                                <em>Aclaración:</em> La antigüedad a considerar para determinar los días que
+                                corresponden de
+                                vacaciones se computa desde la fecha de inicio de la relación laboral hasta el 31 de
+                                diciembre del año que fue despedido.
+                            </p>
+                        </dd>
+
+                        <dt>SAC Vacaciones no Gozadas</dt>
+                        <dd>
+                            <div>
+                                <p><strong>Vacaciones no gozadas / 12</strong></p>
+                            </div>
+                        </dd>
+
+                        <dt>Salario Anual Complementario (SAC Proporcional)</dt>
+                        <dd>
+
+                            <div>
+                                <p><strong>SAC = (Remuneración / 2 ) x (Días trabajados en el semestre / Días del
+                                        semestre)</strong></p>
+
+                                <p><strong>1° Semestre: 181</strong></p>
+                                <p><strong>1° Semestre año bisiesto: 182</strong></p>
+                                <p><strong>2° Semestre: 184</strong></p>
+
+                                <p><em>Aclaración: </em>Considerar si el despido se da en el primer o segundo semestre.
+                                </p>
+                            </div>
+
+                        </dd>
+
+                        <dt>Indemnización Sustitutiva por Falta de Preaviso</dt>
+                        <dd>
+                            <div>
+                                <p><strong>1° 15 días de remuneración en caso de período de prueba</strong></p>
+                                <p><strong>2° Una remuneración cuando el trabajador tuviese una antigüedad en el empleo
+                                        que
+                                        no
+                                        exceda de CINCO (5) años</strong></p>
+                                <p><strong>3° Dos remuneraciones cuando tuviese una antigüedad superior</strong></p>
+                            </div>
+                        </dd>
+
+                        <dt>SAC Indemnización Sustitutiva por Falta de Preaviso</dt>
+                        <dd>
+                            <div>
+                                <p><strong>Indemnización Sustitutiva por Falta de Preaviso / 12</strong></p>
+                            </div>
+                        </dd>
+
+                        <dt>Indemnización por Antigüedad</dt>
+                        <dd>
+                            <div>
+                                <p><strong>Remuneración * Años de Antigüedad</strong></p>
+                            </div>
+
+                        </dd>
+
+                        <dt>SAC Indemnización por Antigüedad</dt>
+                        <dd>
+                            <div>
+                                <p><strong>Indemnización por Antigüedad / 12</strong></p>
+                            </div>
+                        </dd>
+                    </dl>
+
+
+                </section>
+            </details>
+
+            <form id="indemnizacionForm">
+                <label for="fechaIngreso">Fecha de ingreso a trabajar:</label>
+                <input type="date" id="fechaIngreso" name="fechaIngreso" required />
+
+                <label for="fechaDespido">Fecha de despido:</label>
+                <input type="date" id="fechaDespido" name="fechaDespido" required />
+
+                <label for="remuneracion">Remuneración:</label>
+                <input type="number" id="remuneracion" name="remuneracion" min="0" step="0.01" required />
+
+                <label class="checkbox-group" for="preaviso" style="font-weight: normal; cursor: pointer;">
+                    <input type="checkbox" id="preaviso" name="preaviso" />
+                    <span class="custom-checkbox"></span>
+                    Recibió preaviso
+                </label>
+
+
+                <button type="submit">Calcular</button>
+            </form>
+            <div id="result"></div>
+        </div>
+
+    </main>
+
+    <script src="./scriptIndem.js"></script>
+
+</body>
+
+
+</html>

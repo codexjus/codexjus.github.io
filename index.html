@@ -1,11 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portal de Educación Jurídica</title>
+    <link rel="stylesheet" href="./sources/css/reset.css">
+    <link rel="shortcut icon" href="./sources/icons/fav.png" type="image/x-icon">
 </head>
-<body>
-    <h1>Hello World!</h1>
+
+<body id="top">
+
+    <header>
+        <h1>Codex_Ius: <span id="animated-text">aprender;</span></h1>
+
+        <h2>Portal de Educación Jurídica</h2>
+    </header>
+    <nav>
+        <a href="#recomendaciones">Recomendaciones</a>
+        <a href="#legislacion">Legislación</a>
+        <a href="#teoriaJuridica">Teoría Jurídica</a>
+        <a href="#appsJuridicas">Apps Jurídicas</a>
+    </nav>
+    <main>
+
+
+        <article id="recomendaciones">
+            <div class="divContainer">
+                <a href="./sources/res_lex/cn.html">Constitución Nacional</a>
+                <a href="./sources/res_lex/cpmdz.html">Constitución de Mendoza</a>
+                <a href="./sources/res_lex/ccyc.html">Código Civil y Comercial</a>
+                <a href="./sources/res_lex/cpn.html">Código Penal Nacional</a>
+                <a href="./sources/res_lex/cpcct.html">Código Procesal Civil, Comercial y Tributario - Mdz</a>
+                <a href="./sources/res_lex/cppmdz.html">Código Procesal Penal - Mdz</a>
+                <a href="https://drive.google.com/file/d/1q0Ah2P3CvcX9f7xQKb02gqOwChNsM5kO/view?usp=drive_link">Ensayo
+                    de respuesta al delito - 26/09/2017</a>
+                <a href="https://drive.google.com/file/d/1i8xF9AFIhN2lA9e7CQmIlpyzm9srZhqN/view?usp=drive_link">Critica
+                    al Sistema Penal - 15/09/2021</a>
+                <a href="./sources/res_archive/procesal.html">Repaso Procesal</a>
+
+            </div>
+        </article>
+        <article id="legislacion">
+            
+                <h3>Buscador de leyes</h3>
+                <input id="search-input" type="search" placeholder="Buscar...">
+                <div id="leyes" class="containerEnlaces"></div>
+            
+
+        </article>
+
+        <section id="teoriaJuridica">
+            <div id="cards-container"></div>
+        </section>
+
+        <article id="appsJuridicas">
+            <h3>Apps Jurídicas</h3>
+            <section id="software">
+                <div class="card_docs">
+                    <h4>Calculadora: Liquidación Final</h4>
+                    <p>Calculadora básica de rubros indemnizatorios laborales según la legislación argentina. Me
+                        sirvió
+                        para practicar programación, por lo que si encuentras fallas o quieres sugerir mejoras
+                        puedes
+                        contactarme...</p>
+                    <a href="./sources/res_app/calculadora.html">Probar...</a>
+                </div>
+            </section>
+            <section id="software">
+                <div class="card_docs">
+                    <h4>Calculadora Previsional</h4>
+                    <p>Calculadora básica de años de servicio...</p>
+                    <a href="./sources/res_app/previsional.html">Probar...</a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div id="contacto" class="footer-container">
+            <h3>Contacto</h3>
+            <p><strong>Autor:</strong> Quiroga Rodrigo Alberto</p>
+            <p>
+                <strong>LinkedIn:</strong>
+                <a href="https://www.linkedin.com/in/rodrigo-quiroga/" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn de Rodrigo Quiroga">
+                    <span class="icon-linkedin" aria-hidden="true"></span> Mi Perfil
+                </a>
+            </p>
+            <p>
+                <strong>GitHub:</strong>
+                <a href="https://github.com/RodrigoAQuiroga" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub de Rodrigo Quiroga">
+                    <span class="icon-github" aria-hidden="true"></span> Mi Repositorio
+                </a>
+            </p>
+            <p class="footer-note">Iconos extraidos desde: <a href="https://icons8.com" target="_blank"
+                    rel="noopener noreferrer">icons8.com</a>.</p>
+        </div>
+    </footer>
+
+
+    <script type="module" src="./scripts/main.js"></script>
 </body>
+
 </html>

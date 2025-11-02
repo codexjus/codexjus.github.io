@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../icons/icons8-temis-96 (1).png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap" rel="stylesheet">
+
+    <title>Calculadora de Fechas y Datos</title>
+    <style>
+        /* Fuente principal */
+        body,
+        main {
+            font-family: 'Open Sans', sans-serif;
+            color: #111;
+            background-color: #fff;
+        }
+
+        /* Contenedores principales */
+        header {
+            background-color: #2a6ebb;
+            padding: 0.5rem 0;
+            text-align: center;
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 2px 6px rgba(42, 110, 187, 0.5);
+            user-select: none;
+            margin-bottom: 1rem;
+        }
+
+        main {
+            display: block;
+            margin: 0 1rem;
+        }
+
+        /* Textareas */
+        textarea {
+            width: 80vw;
+            max-width: 100%;
+            height: 160px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            border: 1.5px solid #bbb;
+            border-radius: 6px;
+            padding: 10px 12px;
+            resize: vertical;
+            margin: 1rem auto;
+            display: block;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #2a6ebb;
+            outline: none;
+            background-color: #f0f6fc;
+        }
+
+        /* Tablas */
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            margin-top: 1.25rem;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            color: #222;
+            font-size: 1rem;
+        }
+
+        table input {
+            background-color: inherit;
+            font-size: 1rem;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2a6ebb;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        tr:hover {
+            background-color: #d0e2f9;
+        }
+
+        /* Encabezados */
+
+        h3 {
+            margin-top: 2rem;
+            color: #233659;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        /* Resultados y mensajes */
+        #resultado,
+        #resultadoAnt,
+        #resultadoMonotributo,
+        #resultadoResumen {
+            margin-top: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #bf2c2c;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .tablink {
+            background-color: #e4e7ec;
+            color: #333;
+            border: 1px solid #bbb;
+            padding: 0.5em 1.2em;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            user-select: none;
+        }
+
+        .tablink:hover {
+            background-color: #bed0f7;
+            border-color: #7a94d3;
+            color: #1a2a6c;
+        }
+
+        .tablink.active {
+            background-color: #2a6ebb;
+            color: white;
+            font-weight: 700;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 1rem;
+            border: solid 1px #7a94d3;
+        }
+
+        .tabcontent:first-child {
+            display: block;
+        }
+
+        select{
+            padding: 0.5rem 1rem;            
+        }
+
+        /* Botones */
+        button,
+        .printbutton {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            background-color: #2a6ebb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7em 1.5em;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            user-select: none;
+            margin-top: 0.8rem;
+        }
+
+        button:hover,
+        .printbutton:hover {
+            background-color: #1a3f90;
+        }
+
+        @media print {
+
+            body,
+            main,
+            header,
+            .tablink,
+            button {
+                -webkit-print-color-adjust: exact !important;
+                /* para Chrome, Safari */
+                print-color-adjust: exact !important;
+                /* para otros navegadores modernos */
+            }
+
+            /* Opcional: aseguramos fondos visibles en impresión */
+            body,
+            main {
+                background-color: #fff !important;
+            }
+
+            header {
+                background-color: #2a6ebb !important;
+                color: #fff !important;
+                box-shadow: none !important;
+                /* opcional para impresión */
+            }
+
+            .tablink {
+                background-color: #2a6ebb !important;
+                color: white !important;
+            }
+
+            button {
+                background-color: #2a6ebb !important;
+                color: white !important;
+                border: none !important;
+            }
+
+
+            .tabs {
+                display: none !important;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>Determinación del derecho - Tiempo de servicio</h2>
+    </header>
+    <main>
+        <div class="tabs">
+            <button class="tablink" data-tab="datosSujetoContainer">Datos Personales</button>
+            <button class="tablink" data-tab="ant">Datos hasta 06/1994</button>
+            <button class="tablink" data-tab="desde">Datos desde 07/1994</button>
+            <button class="tablink" data-tab="monotributo">Monotributo Aportante</button>
+            <button class="tablink" data-tab="resumen">Resumen</button>
+        </div>
+
+        <!-- Datos del datosSujetoContainer -->
+        <div id="datosSujetoContainer" class="tabcontent">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="nombreApellido">Apellido y Nombre:</label></td>
+                        <td><input type="text" id="nombreApellido" placeholder="Apellido y Nombre" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="dni">DNI:</label></td>
+                        <td><input type="number" id="dni" placeholder="DNI" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="cuilCuit">CUIL/CUIT:</label></td>
+                        <td><input type="text" id="cuilCuit" placeholder="xx-xxxxxxxx-x" pattern="\d{2}-\d+-\d+" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="generoRegistral">Género Registral:</label></td>
+                        <td>
+                            <select id="generoRegistral">
+                                <option value="">Seleccionar</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="No Binario">No Binario</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="lugarNacimiento">Lugar de Nacimiento:</label></td>
+                        <td><input type="text" id="lugarNacimiento" placeholder="Lugar de Nacimiento" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="fechaNacimiento">Fecha de Nacimiento:</label></td>
+                        <td><input type="text" id="fechaNacimiento" placeholder="dd/mm/yyyy"
+                                pattern="^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="fechaIngresoPais">Fecha de ingreso al país:</label></td>
+                        <td><input type="text" id="fechaIngresoPais" placeholder="dd/mm/yyyy ó -" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="btnDatosSujeto">Guardar Datos</button>
+            <div id="resultadoSujeto"></div>
+        </div>
+
+        <!-- Datos hasta 06/1994 -->
+        <div id="ant" class="tabcontent">
+            <h2>Datos hasta 06/1994</h2>
+            <textarea id="inputTextAnt" placeholder="Pega aquí los datos anteriores a 07/94..."></textarea><br />
+            <button id="btnProcesarAnt">Procesar Datos Antiguos</button>
+            <div id="resultadoAnt"></div>
+        </div>
+
+        <!-- Datos desde 07/1994 -->
+        <div id="desde" class="tabcontent">
+            <h2>Datos desde 07/1994</h2>
+            <textarea id="inputText" placeholder="Pega aquí los datos desde 07/94..."></textarea><br />
+            <button id="btnProcesarDesde">Procesar Datos</button>
+            <div id="resultado"></div>
+        </div>
+
+        <!-- Monotributo Aportante -->
+        <div id="monotributo" class="tabcontent">
+            <h2>Datos Monotributo Aportante</h2>
+            <textarea id="inputMonotributo" placeholder="Pega aquí datos de Monotributo Aportante..."></textarea><br />
+            <button id="btnProcesarMono">Procesar Monotributo Aportante</button>
+            <div id="resultadoMonotributo"></div>
+        </div>
+
+        <!-- Resumen -->
+        <div id="resumen" class="tabcontent">
+            <h2>Resumen</h2>
+            <button id="btnResumen">Generar Resumen</button>
+            <div id="resultadoResumen">
+
+            </div>
+        </div>
+    </main>
+    <script type="module" src="./script_pr/main.js"></script>
+</body>
+
+
+</html>

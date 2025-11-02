@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chatbot Jurídico Interactivo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e9f0f8;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      color: #202020;
+    }
+
+    #chatbot-container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 80vw;
+      padding: 25px 30px;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    h2 {
+      text-align: center;
+      color: #084c8d;
+      font-weight: 700;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    #input-area {
+      display: flex;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    #input-termino {
+      flex-grow: 1;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border: 2px solid #b6c7db;
+      border-radius: 8px 0 0 8px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    #input-termino:focus {
+      border-color: #3c78d8;
+      box-shadow: 0 0 8px rgba(60, 120, 216, 0.4);
+    }
+
+    #btn-buscar {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      background-color: #3c78d8;
+      color: white;
+      cursor: pointer;
+      border-radius: 0 8px 8px 0;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    #btn-buscar:hover {
+      background-color: #305bb8;
+    }
+
+    #sugerencias {
+      position: absolute;
+      top: 46px;
+      left: 0;
+      right: 100px;
+      background: white;
+      border: 2px solid #b6c7db;
+      border-top: none;
+      max-height: 180px;
+      overflow-y: auto;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: none;
+      z-index: 1000;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      font-size: 0.95rem;
+    }
+
+    #sugerencias li {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    #sugerencias li:hover {
+      background-color: #d9e5ff;
+      color: #084c8d;
+    }
+
+    #toggle-lista {
+      display: block;
+      margin: 10px auto 20px auto;
+      background-color: #f4f7fb;
+      border: 1.5px solid #b6c7db;
+      color: #3c78d8;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+      max-width: 220px;
+      text-align: center;
+    }
+
+    #toggle-lista:hover {
+      background-color: #dde7fa;
+      border-color: #3c78d8;
+    }
+
+    #lista-conceptos-container {
+      border: 2px solid #b6c7db;
+      border-radius: 10px;
+      padding: 15px 20px;
+      max-height: 300px;
+      overflow-y: auto;
+      background: #fafbff;
+      font-size: 1rem;
+    }
+
+    #lista-conceptos {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    #lista-conceptos li {
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      color: #202020;
+    }
+
+    #lista-conceptos li:hover {
+      background-color: #d9e5ff;
+      color: #084c8d;
+    }
+
+    #resultado {
+      margin-top: 25px;
+      min-height: 140px;
+      border: 2px solid #b6c7db;
+      padding: 20px 25px;
+      border-radius: 12px;
+      background: #fbfcff;
+      color: #222;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.05);
+    }
+
+    #resultado h3 {
+      margin-top: 0;
+      color: #084c8d;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 15px 10px;
+      }
+
+      #chatbot-container {
+        max-width: 100%;
+        padding: 20px 15px;
+      }
+
+      #input-area {
+        flex-direction: column;
+      }
+
+      #input-termino,
+      #btn-buscar {
+        width: 100%;
+        border-radius: 6px;
+      }
+
+      #btn-buscar {
+        margin-top: 10px;
+        border-radius: 6px;
+      }
+
+      #sugerencias {
+        right: 0;
+        top: 70px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="chatbot-container">
+    <h2>Consulta Jurídica Rápida</h2>
+
+    <div id="input-area">
+      <input type="text" id="input-termino" placeholder="Escribe un término jurídico..." autocomplete="off" />
+      <button id="btn-buscar">Buscar</button>
+      <ul id="sugerencias"></ul>
+    </div>
+
+    <button id="toggle-lista">Ocultar lista de conceptos</button>
+
+    <div id="lista-conceptos-container">
+      <ul id="lista-conceptos"></ul>
+    </div>
+
+    <div id="resultado">
+      <p>Escribe un término y haz clic en Buscar para ver la definición.</p>
+    </div>
+  </div>
+
+  <script>
+    const glosario = [
+      {
+        "titulo": "Persona",
+        "introduccion": "<h3>Concepto Integrado de Persona y Sujeto Jurídico</h3> <p>La palabra <strong>persona</strong> proviene del latín <em>persona</em>, derivado del verbo <em>personare</em>, que significa “resonar a través de”, y se originó en la máscara que usaban los actores en el teatro romano y griego para amplificar su voz y representar un papel o rol social. Esta etimología refleja la idea de que la persona es la manifestación o “máscara” que representa un sujeto con voz propia en la sociedad y en el orden jurídico.</p> <p>Por otro lado, el término <strong>sujeto</strong> tiene su origen en el latín <em>subiectus</em>, participio pasado de <em>subicere</em>, que significa “poner debajo” o “someter”. En el derecho, se refiere a la entidad que está “bajo” el ordenamiento jurídico, que es la única con aptitud para producir efectos jurídicos y ser titular de derechos y obligaciones.</p> <p>En este sentido, el <strong>sujeto</strong> es la única entidad concreta capaz de producir efectos jurídicos, mientras que la <strong>persona</strong> es la forma particular que adopta dicho sujeto, caracterizada y conformada a través de los atributos que el ordenamiento le reconoce. Por eso decimos que las personas son sujetos, dado que se les reconoce la capacidad para actuar en el plano jurídico y producir efectos, es decir, son identificados como titulares de derechos y deberes.</p> <p>El origen de esta condición de sujeto puede variar: en el caso de las personas naturales, se reconoce por su existencia biológica y social; mientras que en las personas jurídicas, la capacidad de ser sujetos surge de una constitución o creación legal.</p> <p>Así, la persona es la manifestación concreta y reconocida del sujeto, que en el escenario jurídico desempeña un rol activo y pasivo, y el sujeto es el núcleo o centro de imputación dentro del sistema jurídico, portando la aptitud que fundamenta la personalidad y capacidad jurídica.</p>",
+        "etimologia": "Del latín persona, que significa máscara o carácter social.",
+        "fundamentos_legales": '<h3>Fundamentos Legales sobre la Persona</h3> <h4>Tratados Internacionales de Derechos Humanos ratificados por Argentina</h4> <ul> <li>Declaración Universal de los Derechos Humanos (1948): <ul> <li>Artículo 1: "Todos los seres humanos nacen libres e iguales en dignidad y derechos."</li> <li>Artículo 2: "Toda persona tiene todos los derechos y libertades proclamados en esta Declaración, sin distinción alguna."</li> </ul> </li> <li>Convención Americana sobre Derechos Humanos (1969): <ul> <li>Artículo 1: "Los Estados partes reconocen a toda persona como sujeta de derechos y obligaciones."</li> <li>Artículo 24: "Igualdad ante la ley. Todas las personas son iguales ante la ley."</li> </ul> </li>  </ul> </li> </ul> <h4>Constitución Nacional Argentina</h4> <ul> <li>Artículo 16: "La Nación Argentina no admite prerrogativas de sangre, ni de nacimiento: no hay en ella fueros personales ni títulos de nobleza."</li> <li>Artículo 75 inciso 22: Incorporación y jerarquía constitucional de los tratados internacionales de derechos humanos, incluyendo por lo tanto la regulación sobre la persona.</li> <li>Artículo 43: "Toda persona puede interponer acción expedita y rápida de amparo contra todo acto u omisión de autoridad pública..."</li> </ul> <h4>Código Civil y Comercial de la Nación</h4> <ul> <li>Título I, Persona humana (Artículos 19 a 140): <ul> <li>Artículo 19: Define la capacidad de las personas para gozar y ejercer derechos.</li> <li>Artículo 20 y siguientes: Regulación de la personalidad jurídica, estado civil, capacidad de obrar y protección de la persona.</li> </ul> </li> <li>Artículo 15: "Las personas son titulares de los derechos individuales sobre los bienes que integran su patrimonio..."</li> </ul>',
+        "naturaleza_juridica": "Entidades susceptibles de tener derechos y obligaciones.",
+        "elementos_requisitos": "Capacidad de goce y ejercicio.",
+        "clasificaciones": "Persona natural y persona jurídica.",
+        "efectos_juridicos": "Capacidad para ejercer derechos y contraer obligaciones.",
+        "plazo_prescripcion": "",
+        "jurisprudencia_doctrina": "Doctrinas que destacan la importancia de la capacidad jurídica.",
+        "ejemplos_practicos": "Un menor tiene capacidad limitada, una empresa es persona jurídica.",
+        "notas_referencias": "Véase código civil y doctrina legal."
+      },
+      {
+        "titulo": "Contrato",
+        "introduccion": "Lorem.",
+        "etimologia": "Lorem",
+        "fundamentos_legales": "..",
+        "naturaleza_juridica": "...",
+        "elementos_requisitos": "...",
+        "clasificaciones": "...",
+        "efectos_juridicos": "...",
+        "plazo_prescripcion": "",
+        "jurisprudencia_doctrina": "...",
+        "ejemplos_practicos": "...",
+        "notas_referencias": "..."
+      }
+    ];
+
+    const inputTermino = document.getElementById('input-termino');
+    const btnBuscar = document.getElementById('btn-buscar');
+    const resultadoDiv = document.getElementById('resultado');
+    const sugerenciasUl = document.getElementById('sugerencias');
+    const listaConceptosContainer = document.getElementById('lista-conceptos-container');
+    const listaConceptosUl = document.getElementById('lista-conceptos');
+    const toggleListaBtn = document.getElementById('toggle-lista');
+
+    // Renderiza lista completa o filtrada según texto
+    function renderListaConceptos(filtro = '') {
+      listaConceptosUl.innerHTML = '';
+      const filtroMinuscula = filtro.toLowerCase();
+      const filtrados = glosario.filter(item => item.titulo.toLowerCase().includes(filtroMinuscula));
+      filtrados.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item.titulo;
+        li.style.cursor = 'pointer';
+        li.addEventListener('click', () => {
+          inputTermino.value = item.titulo;
+          buscarTermino();
+        });
+        listaConceptosUl.appendChild(li);
+      });
+      if (filtrados.length === 0) {
+        listaConceptosUl.innerHTML = '<li style="color:#666;">No hay conceptos que coincidan.</li>';
+      }
+    }
+
+    // Buscar término y mostrar definición con innerHTML directamente
+    function buscarTermino() {
+      const terminoBuscado = inputTermino.value.trim().toLowerCase();
+      if (!terminoBuscado) {
+        mostrarResultado("<p style='color:red;'>Por favor, ingresa un término para buscar.</p>");
+        return;
+      }
+      const encontrado = glosario.find(item => item.titulo.toLowerCase() === terminoBuscado) ||
+        glosario.find(item => item.titulo.toLowerCase().includes(terminoBuscado));
+      if (encontrado) {
+        // Mostrar todos los campos del concepto con etiquetas
+        const c = encontrado;
+        resultadoDiv.innerHTML = `
+        <h3>${c.titulo}</h3>
+        <p><strong>Introducción:</strong> ${c.introduccion}</p>
+        ${c.etimologia ? `<p><strong>Etimología:</strong> ${c.etimologia}</p>` : ''}
+        ${c.fundamentos_legales ? `<p><strong>Fundamentos legales:</strong> ${c.fundamentos_legales}</p>` : ''}
+        ${c.naturaleza_juridica ? `<p><strong>Naturaleza jurídica:</strong> ${c.naturaleza_juridica}</p>` : ''}
+        ${c.elementos_requisitos ? `<p><strong>Elementos y requisitos:</strong> ${c.elementos_requisitos}</p>` : ''}
+        ${c.clasificaciones ? `<p><strong>Clasificaciones:</strong> ${c.clasificaciones}</p>` : ''}
+        ${c.efectos_juridicos ? `<p><strong>Efectos jurídicos:</strong> ${c.efectos_juridicos}</p>` : ''}
+        ${c.plazo_prescripcion ? `<p><strong>Plazo o prescripción:</strong> ${c.plazo_prescripcion}</p>` : ''}
+        ${c.jurisprudencia_doctrina ? `<p><strong>Jurisprudencia y doctrina:</strong> ${c.jurisprudencia_doctrina}</p>` : ''}
+        ${c.ejemplos_practicos ? `<p><strong>Ejemplos prácticos:</strong> ${c.ejemplos_practicos}</p>` : ''}
+        ${c.notas_referencias ? `<p><strong>Notas o referencias:</strong> ${c.notas_referencias}</p>` : ''}
+      `;
+      } else {
+        mostrarResultado(`<p>No se encontró definición para: <strong>${inputTermino.value}</strong></p>`);
+      }
+      sugerenciasUl.style.display = 'none';
+    }
+
+    // Mostrar resultado con innerHTML ya definido
+    function mostrarResultado(texto) {
+      resultadoDiv.innerHTML = texto;
+    }
+
+    // Controla la lista visible y sugerencias al escribir
+    inputTermino.addEventListener('input', () => {
+      const texto = inputTermino.value.trim().toLowerCase();
+      if (listaConceptosContainer.style.display === 'none') {
+        // Lista oculta, mostrar sugerencias
+        if (!texto) {
+          sugerenciasUl.style.display = 'none';
+          return;
+        }
+        const filtrados = glosario.filter(item => item.titulo.toLowerCase().startsWith(texto));
+        if (filtrados.length === 0) {
+          sugerenciasUl.style.display = 'none';
+          return;
+        }
+        sugerenciasUl.innerHTML = '';
+        filtrados.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item.titulo;
+          li.addEventListener('click', () => {
+            inputTermino.value = item.titulo;
+            sugerenciasUl.style.display = 'none';
+            buscarTermino();
+          });
+          li.addEventListener('mouseenter', () => li.style.backgroundColor = '#d9e5ff');
+          li.addEventListener('mouseleave', () => li.style.backgroundColor = 'white');
+          sugerenciasUl.appendChild(li);
+        });
+        sugerenciasUl.style.display = 'block';
+      } else {
+        // Lista visible, filtrar lista principal
+        sugerenciasUl.style.display = 'none';
+        renderListaConceptos(texto);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#input-area')) {
+        sugerenciasUl.style.display = 'none';
+      }
+    });
+
+    btnBuscar.addEventListener('click', buscarTermino);
+    inputTermino.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        buscarTermino();
+        sugerenciasUl.style.display = 'none';
+      }
+    });
+
+    toggleListaBtn.addEventListener('click', () => {
+      if (listaConceptosContainer.style.display === 'none') {
+        listaConceptosContainer.style.display = 'block';
+        toggleListaBtn.textContent = 'Ocultar lista de conceptos';
+        renderListaConceptos(inputTermino.value);
+        sugerenciasUl.style.display = 'none';
+      } else {
+        listaConceptosContainer.style.display = 'none';
+        toggleListaBtn.textContent = 'Mostrar lista de conceptos';
+      }
+    });
+
+    // Inicializar lista visible al cargar página
+    listaConceptosContainer.style.display = 'block';
+    renderListaConceptos();
+
+  </script>
+
+
+</body>
+
+</html>

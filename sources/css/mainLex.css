@@ -1,0 +1,114 @@
+@import url("reset.css");
+
+/* Destacado de términos buscados */
+#highlight {
+  background-color: #0066CC;
+  scroll-margin-top: 10rem;
+  color: #f1f1f1;
+  font-weight: bold;
+}
+
+/* Main con margen inferior para footer */
+main {
+  margin-bottom: 10rem;
+  padding: 2rem;
+  font-family: 'Roboto', sans-serif; /* Consistencia en fuente */
+  color: var(--color-texto-principal);
+}
+
+/* Navegación sticky coherente con reset principal */
+nav {
+  position: sticky;
+  top: 0;
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  gap: 0.1em;
+  z-index: 1000;
+  background: var(--color-header-footer-bg);
+  padding: 1.5rem;
+  border-radius: 1em;
+  box-shadow: 0 2px 8px var(--color-shadow);
+  border: 1px solid var(--color-borde);
+  margin: auto;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* Inputs en coherencia con reset */
+input {
+  color: var(--color-texto-principal);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+/* Encabezados h3, h4, h5 simplificados y legibles */
+h3,
+h4,
+h5 {
+  display: block;
+  margin-left: 0;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  color: var(--color-titulo);
+  font-weight: 700;
+}
+
+/* Resalta encabezados con id objetivo */
+h3:target,
+h4:target {
+  border: solid 1px var(--color-enlace-hover);
+  scroll-margin-top: 13rem;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+/* Contenedor índice consistente */
+#indice {
+  width: 90vw;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Márgenes para div en índice */
+div > div {
+  margin-bottom: 1em;
+}
+
+/* Estilos para enlaces del índice */
+div > div > a {
+  display: block;
+  color: var(--color-enlace);
+  text-decoration: none;
+  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+  border-radius: 0.3em;
+  margin-bottom: 1em;
+  padding-left: 0.4em;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+div > div > a:hover,
+div > div > a:focus {
+  border-left-color: var(--color-enlace-hover);
+  background-color: var(--color-fondo-hover);
+  color: var(--color-enlace-hover);
+  outline: none;
+}
+
+/* Subtítulos h3 dentro de div */
+div h3 {
+  margin: 0.8em 0 0.3em 1.5em;
+  color: var(--color-enlace);
+  padding-left: 0.4em;
+  font-weight: 700;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+/* Suaviza transiciones para enlaces en general */
+a {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
